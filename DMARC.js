@@ -256,7 +256,7 @@ function handleResponse(){
                     document.getElementById("col21").style.backgroundColor = "green";
                     document.getElementById("col22").style.backgroundColor = "rgb(250, 250, 254)";
                     document.getElementById("iconSVGSpf").style.color="green";
-                    document.getElementById("texteSPF").innerHTML="Votre domaine a un enregistrement SPF valide. Vous pouvez suivre, gérer et améliorer vos normes d'authentification des e-mails en utilisant notre plateforme.";
+                    document.getElementById("texteSPF").innerHTML="Votre domaine a un enregistrement SPF valide. Vous êtes protégé contre toute utilisation frauduleuse de votre domaine (phishing).";
                     document.getElementById("texteSPF").style.color="black";
                     document.getElementById("enterDomaine").innerHTML="";
                     document.getElementById("domainNAme").style.borderColor="blue";
