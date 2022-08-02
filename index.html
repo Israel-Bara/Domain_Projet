@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css" integrity="sha384-zIaWifL2YFF1qaDiAo0JFgsmasocJ/rqu7LKYH8CoBEXqGbb9eO+Xi3s6fQhgFWM" crossorigin="anonymous">
+    <link rel="stylesheet" href="projet.css">
+    <script src="DMARC.js" defer></script>
+    <title>Projet DMARC</title>
+  </head>
+  <body>
+   <header>
+      <h1><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-disc-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-6 0a2 2 0 1 0-4 0 2 2 0 0 0 4 0zM4 8a4 4 0 0 1 4-4 .5.5 0 0 0 0-1 5 5 0 0 0-5 5 .5.5 0 0 0 1 0zm9 0a.5.5 0 1 0-1 0 4 4 0 0 1-4 4 .5.5 0 0 0 0 1 5 5 0 0 0 5-5z"/>
+      </svg>      ANALYSER VOTRE DOMAINE</h1>
+      <aside>
+        <h2 class="row">Analysez votre domaine afin de détecter d'éventuels problèmes avec les enregistrements DMARC, SPF et DKIM .</h2>
+        <form id="envoiDomaine">
+          <div class="form-group">
+            <!--Label pour entrer le nom de domaine-->
+            <label for="domainName">Domain</label>
+            <center><input type="text" class="form-control" id="domainNAme" placeholder="Enter your domain name"></center>
+          </div>
+          <!--Boutton d'envoie du nom de domaine-->
+          <button type="button" class="btn btn-primary" id="buttonHidden" onclick="process();" >Scan now </button>
+          <div id="gif"></div>
+          <div id="enterDomaine"></div>
+        </form>
+        <!--Bloc du resultat partiel pour le domaine-->
+        <div class="container-fluid">
+          <div class="row" id="resultFor"><h3 id="resultatDomaine"></h3><span id="retourDomaine"></span></div>
+          <div class="row">
+            <!--Colonne pour enregistrement DMARC-->
+              <div class="col" id="_col">
+                <div class="row justify-content-md-center">
+                  <div class="col" id="col11">1</div>
+                  <div class="col"id="col12">2</div>
+                </div>
+                <div class="row"><br/><h2>DMARC</h2>
+                  <br/>Authentification, rapport et conformité des messages basés sur le domaine
+                </div>
+              </div>
+              <!--Colonne pour l'enregistrement SPF-->
+              <div class="col" id="_col">
+                <div class="row justify-content-md-center">
+                  <div class="col" id="col21">1</div>
+                  <div class="col" id="col22">2</div>
+                </div>
+                <div class="row"><br/><h2>SPF</h2>
+                  <br/> Cadre de stratégie de l'expéditeur
+                </div>
+              </div>
+              <!--Colonne ppour l'enregistrement DKIM-->
+              <div class="col" id="_col">
+                <div class="row justify-content-md-center">
+                  <div class="col" id="col31">1</div>
+                  <div class="col" id="col32">2</div>
+                </div>
+                <div class="row" id="protocol"><br/><h2>DKIM</h2>
+                  <br/>Courrier identifié par DomainKeys
+                </div>
+              </div>
+              <div class="col" id="_col">Resultat global
+                <div class="row justify-content-md-center">Increase score</div>
+              </div>
+          </div>
+      </div>
+      <!--Bloc pour les resultats detaillés pour le domaine-->
+   <div class="row" id="detailResult"><h3 id="resulatDetail"></h3><span id="retourDomaine2"></span></div> 
+    <div class="row" id="marginRow">
+      <div class="col" id="bgColor">
+        <div class="row" id="rowsvg">
+          <div class="col-2"><svg xmlns="http://www.w3.org/2000/svg"id="iconSVGDmarc" width="85" height="85"  fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+            <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+            <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+          </svg></div>
+          <!--Colonne des resultats detaillés de l'enregistrement DMARC -->
+          <div class="col-10"><h2>DMARC</h2>
+            <p id="texteDmarc"></p>
+          </div>
+        </div>
+        <div class="row">Valeur d'enregistrement:</div>
+        <div class="row"><textarea class="form-control" id="codeDMARC" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></textarea></div>
+        <!--Resultat scindé spf-->
+        <div id="recordDmarc"></div>
+      </div> 
+  </div>
+          <div class="row" id="marginRow">
+            <div class="col" id="bgColor">
+              <div class="row" id="rowsvg">
+                <div class="col-2"><svg xmlns="http://www.w3.org/2000/svg" id="iconSVGSpf" width="85" height="85"  fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+                  <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                  <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                </svg></div>
+                <!--Colonne pour les resultats detaillés pour l'enregistrement SPF-->
+                <div class="col-10"><h2>SPF</h2>
+                  <p id="texteSPF"></p>
+                </div>
+              </div>
+              <div class="row">Valeur d'enregistrement:</div>
+              <div class="row"><textarea  class="form-control" id="codeSPF" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></textarea></div>
+            <!--Resultat scindé spf-->
+              <div id="recordSpf"></div>
+            </div> 
+        </div>
+
+        <div class="row" id="marginRow" >
+          <div class="col" id="bgColor">
+            <div class="row" id="rowsvg">
+              <div class="col-2"><svg xmlns="http://www.w3.org/2000/svg" id="iconSVGDkim" width="85" height="85"  fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+                <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+              </svg></div>
+              <!--Colonne pour les resultats detaillés pour les enregistrement DKIM-->
+              <div class="col-10"><h2>DKIM</h2>
+                <p>Result for DKIM</p>
+              </div>
+            </div>
+            <div class="row">Valeur d'enregistrement:</div>
+            <div class="row"><textarea class="form-control" id="codeDKIM" aria-label="Large" aria-describedby="inputGroup-sizing-sm"></textarea></div>
+          </div> 
+      </div>
+      <div class="row" id="button">
+       <button type="button" class="btn btn-primary btn-lg"><svg xmlns="http://www.w3.org/2000/svg" id="iconSVG" width="30" height="30" fill="currentColor" class="bi bi-layer-backward" viewBox="0 0 16 16">
+        <path d="M8.354 15.854a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708l1-1a.5.5 0 0 1 .708 0l.646.647V4H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9v7.793l.646-.647a.5.5 0 0 1 .708 0l1 1a.5.5 0 0 1 0 .708l-3 3z"/>
+        <path d="M1 9a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4.5a.5.5 0 0 1 0 1H1v2h4.5a.5.5 0 0 1 0 1H1zm9.5 0a.5.5 0 0 1 0-1H15V6h-4.5a.5.5 0 0 1 0-1H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4.5z"/>
+        </svg>  Exporter</button></div>
+  </aside>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> 
+  </body>
+</html>
