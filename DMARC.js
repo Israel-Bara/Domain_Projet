@@ -136,7 +136,7 @@ function handleResponse(){
                     /*Decomposition et explication detaillee sur la valeur de l'enregistrement dmarc*/
                     dmarc=dmarc.split(";");
                     for(var i=0;i<dmarc.length;i++){
-                     if(dmarc[i].includes("v=dmarc")){
+                     if(dmarc[i].includes("v=DMARC")){
                         document.getElementById("recordDmarc").innerHTML="<span>Version "+dmarc[i]+"</span>: La balise v est l'une des balises DMARC représentant la version du protocole DMARC et a toujours la valeur v=DMARC1.";
                      }
                      else if(dmarc[i].includes("p=")){
